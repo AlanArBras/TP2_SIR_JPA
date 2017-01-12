@@ -1,6 +1,6 @@
 package jpa;
 
-import domain.EletronicDevice;
+import domain.ElectronicDevice;
 import domain.Heater;
 import domain.Home;
 import domain.Person;
@@ -50,28 +50,50 @@ public class JpaTest {
     }
 
     private void createPersons() {
+
+        List<Person> gwendalsfriends = new ArrayList<Person>();
+        List<Person> alansfriends = new ArrayList<Person>();
+
+        Person friend = new Person("Barbe", "Camille", null, null, null);
+        gwendalsfriends.add(friend);
+        alansfriends.add(friend);
+        manager.persist(friend);
+
+        friend = new Person("Huitel", "Alan", null, null, alansfriends);
+        gwendalsfriends.add(friend);
+        manager.persist(friend);
+
+
+
+        Person person = new Person("Denoual", "Gwendal", createHomes(), createElectronicDevices(), gwendalsfriends);
+        manager.persist(person);
+
+    }
+
+    private List<Home> createHomes() {
         List<Heater> heaters = new ArrayList<Heater>();
-        heaters.add(new Heater("radiat1"));
-        heaters.add(new Heater("radiat2"));
-        heaters.add(new Heater("radiat3"));
+        heaters.add(new Heater("heater11"));
+        heaters.add(new Heater("heater12"));
+        heaters.add(new Heater("heater13"));
 
         List<Home> homes = new ArrayList<Home>();
         homes.add(new Home("maison1", heaters));
 
-        List<EletronicDevice> eletronicDevices = new ArrayList<EletronicDevice>();
-        List<Person> friends = new ArrayList<Person>();
-        Person poto1 = new Person("Huitel", "Alan", null, null, null);
-        friends.add(poto1);
-        manager.persist(poto1);
+        heaters = new ArrayList<Heater>();
+        heaters.add(new Heater("heater21"));
+        heaters.add(new Heater("heater22"));
+        heaters.add(new Heater("heater23"));
 
-        Person poto2 = new Person("Barbe", "Camille", null, null, null);
-        friends.add(poto2);
-        manager.persist(poto2);
+        homes.add(new Home("maison2", heaters));
+        return homes;
+    }
 
-
-        Person person = new Person("Denoual", "Gwendal", null, null, friends);
-        manager.persist(person);
-
+    private List<ElectronicDevice> createElectronicDevices() {
+        List<ElectronicDevice> electronicDevices = new ArrayList<ElectronicDevice>();
+        electronicDevices.add(new ElectronicDevice("device1", 1000));
+        electronicDevices.add(new ElectronicDevice("device2", 1200));
+        electronicDevices.add(new ElectronicDevice("device3", 1500));
+        return electronicDevices;
     }
 
 

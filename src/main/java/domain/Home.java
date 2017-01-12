@@ -17,6 +17,14 @@ public class Home {
     public Home(String nomMaison, List<Heater> heaters) {
         this.nomMaison = nomMaison;
         this.heaters = heaters;
+        initHeaters();
+    }
+
+    private void initHeaters() {
+        if (heaters != null)
+            for (Heater heater : heaters) {
+                heater.setHome(this);
+            }
     }
 
     public Home() {
@@ -41,7 +49,7 @@ public class Home {
         this.nomMaison = nomMaison;
     }
 
-    @OneToMany(mappedBy = "home")
+    @OneToMany(mappedBy = "home", cascade = CascadeType.PERSIST)
     public List<Heater> getHeaters() {
         return heaters;
     }

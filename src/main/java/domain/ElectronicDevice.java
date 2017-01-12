@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
  * Created by alan on 1/10/17.
  */
 @Entity
-public class EletronicDevice {
+public class ElectronicDevice {
 
     private long Id;
     private String nom;
@@ -17,11 +17,11 @@ public class EletronicDevice {
     private Person person;
 
 
-    public EletronicDevice(){
+    public ElectronicDevice(){
 
     }
 
-    public EletronicDevice(String nom, double consoWattH) {
+    public ElectronicDevice(String nom, double consoWattH) {
         this.nom = nom;
         this.consoWattH = consoWattH;
     }

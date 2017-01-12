@@ -1,4 +1,5 @@
 package domain;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -12,21 +13,36 @@ public class Person {
     private String nom;
     private String prenom;
     private List<Home> homes;
-    private List<EletronicDevice> eletronicDevices;
+    private List<ElectronicDevice> electronicDevices;
     private List<Person> friends;
 
 
-
-    public Person(){
+    public Person() {
 
     }
 
-    public Person(String nom, String prenom, List<Home> homes, List<EletronicDevice> eletronicDevices, List<Person> friends) {
+    public Person(String nom, String prenom, List<Home> homes, List<ElectronicDevice> electronicDevices, List<Person> friends) {
         this.nom = nom;
         this.prenom = prenom;
         this.homes = homes;
-        this.eletronicDevices = eletronicDevices;
+        initHomes();
+        this.electronicDevices = electronicDevices;
+        initDevices();
         this.friends = friends;
+    }
+
+    private void initHomes() {
+        if (homes != null)
+            for (Home home : homes) {
+                home.setPerson(this);
+            }
+    }
+
+    private void initDevices() {
+        if (electronicDevices != null)
+            for (ElectronicDevice device : electronicDevices) {
+                device.setPerson(this);
+            }
     }
 
     @Id
@@ -64,20 +80,20 @@ public class Person {
         this.homes = homes;
     }
 
-    @OneToMany(mappedBy = "person")
-    public List<EletronicDevice> getEletronicDevices() {
-        return eletronicDevices;
+    @OneToMany(mappedBy = "person", cascade = CascadeType.PERSIST)
+    public List<ElectronicDevice> getElectronicDevices() {
+        return electronicDevices;
     }
 
-    public void setEletronicDevices(List<EletronicDevice> eletronicDevices) {
-        this.eletronicDevices = eletronicDevices;
+    public void setElectronicDevices(List<ElectronicDevice> electronicDevices) {
+        this.electronicDevices = electronicDevices;
     }
 
     @ManyToMany
     @JoinTable(
             name = "PERSON_FRIENDS",
-            joinColumns = @JoinColumn(name = "ID_PERSON", referencedColumnName="ID"),
-            inverseJoinColumns = @JoinColumn(name = "ID_FRIEND", referencedColumnName="ID")
+            joinColumns = @JoinColumn(name = "ID_PERSON", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "ID_FRIEND", referencedColumnName = "ID")
     )
     public List<Person> getFriends() {
         return friends;
