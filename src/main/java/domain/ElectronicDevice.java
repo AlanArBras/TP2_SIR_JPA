@@ -9,39 +9,19 @@ import javax.persistence.ManyToOne;
  * Created by alan on 1/10/17.
  */
 @Entity
-public class ElectronicDevice {
+public class ElectronicDevice extends SmartDevice {
 
-    private long Id;
-    private String nom;
     private double consoWattH;
     private Person person;
 
 
-    public ElectronicDevice(){
+    public ElectronicDevice() {
 
     }
 
-    public ElectronicDevice(String nom, double consoWattH) {
-        this.nom = nom;
+    public ElectronicDevice(String name, double consoWattH) {
+        super(name);
         this.consoWattH = consoWattH;
-    }
-
-    @Id
-    @GeneratedValue
-    public long getId() {
-        return Id;
-    }
-
-    public void setId(long id) {
-        Id = id;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
     }
 
     public double getConsoWattH() {
