@@ -11,8 +11,11 @@ public class Home {
 
     private long id;
     private String nomMaison;
-    private List<Heater> heaters;
     private Person person;
+    
+    //Les entités doivent de préférence ne contenir que les @ JPA, setteurs, getteurs ce qui correspond au code métier (les tables dans la BD en gros).
+    //Les initialisations devront se faire de préférence dans une autre classe qui contient pas le @Entity comme les classes de test, ton main, etc..
+    private List<Heater> heaters;
 
     public Home(String nomMaison, List<Heater> heaters) {
         this.nomMaison = nomMaison;

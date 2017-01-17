@@ -57,16 +57,19 @@ public class JpaTest {
         Person friend = new Person("Barbe", "Camille", null, null, null);
         gwendalsfriends.add(friend);
         alansfriends.add(friend);
+        initHomesPerson(friend);
         manager.persist(friend);
 
         friend = new Person("Huitel", "Alan", null, null, alansfriends);
         gwendalsfriends.add(friend);
+        initHomesPerson(friend);
         manager.persist(friend);
 
 
-
-        Person person = new Person("Denoual", "Gwendal", createHomes(), createElectronicDevices(), gwendalsfriends);
-        manager.persist(person);
+        Person gwendal = new Person("Denoual", "Gwendal", createHomes(), createElectronicDevices(), gwendalsfriends);
+        initElectronicDevicesPerson(gwendal);
+        initHomesPerson(gwendal);
+        manager.persist(gwendal);
 
     }
 
@@ -85,6 +88,7 @@ public class JpaTest {
         heaters.add(new Heater("heater23"));
 
         homes.add(new Home("maison2", heaters));
+        initHeatersHome(homes);
         return homes;
     }
 
@@ -96,5 +100,23 @@ public class JpaTest {
         return electronicDevices;
     }
 
+    private void initHeatersHome(List<Home> homes) {
+        for (Home home : homes)
+            for (Heater heater : home.getHeaters())
+                heater.setHome(home);
+
+    }
+
+    private void initElectronicDevicesPerson(Person person) {
+        if(person.getElectronicDevices() != null)
+            for (ElectronicDevice electronicDevice : person.getElectronicDevices())
+                electronicDevice.setPerson(person);
+    }
+
+    private void initHomesPerson(Person person){
+        if(person.getHomes() != null)
+            for (Home home : person.getHomes())
+                home.setPerson(person);
+    }
 
 }

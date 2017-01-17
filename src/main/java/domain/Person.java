@@ -25,24 +25,8 @@ public class Person {
         this.nom = nom;
         this.prenom = prenom;
         this.homes = homes;
-        initHomes();
         this.electronicDevices = electronicDevices;
-        initDevices();
         this.friends = friends;
-    }
-
-    private void initHomes() {
-        if (homes != null)
-            for (Home home : homes) {
-                home.setPerson(this);
-            }
-    }
-
-    private void initDevices() {
-        if (electronicDevices != null)
-            for (ElectronicDevice device : electronicDevices) {
-                device.setPerson(this);
-            }
     }
 
     @Id
