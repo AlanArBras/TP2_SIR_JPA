@@ -1,6 +1,6 @@
 # TP2_SIR_JPA
-
-TP portant sur l'utilisation de JPA avec le framework Hibernate.
+[Lien vers le sujet](https://docs.google.com/document/d/1IfN_LvfZCZJIu4aNO3_2zpZqAsjObqWRd8Bs4sYtN1I/edit?usp=sharing)
+<br/>TP portant sur l'utilisation de JPA avec le framework Hibernate.
 <br/>Il s'agit :
 - De créer des Beans.
 - De gérer la persistance des classes en utilisant des annotations adéquates (@Id, @GeneratedValue, @OneToMany, @ManyToMany, @ManyToOne, ...)
